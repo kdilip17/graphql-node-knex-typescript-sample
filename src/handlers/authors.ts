@@ -1,7 +1,10 @@
 import * as config from '../config/knexfile';
 import * as Knex from "knex";
 const instance: Knex = Knex.default(config as Knex.Config);
-
+interface authorAdd {
+    name: string
+    age: number
+}
 export class authorController {
     getAuthorById = (authorId: string) => {
         return Promise.resolve(
@@ -26,7 +29,7 @@ export class authorController {
             })
         );
     }
-    addAuthor = (authorObj:any) => {
+    addAuthor = (authorObj:authorAdd) => {
         return Promise.resolve(
             instance("authors").insert({
                 name: authorObj.name,

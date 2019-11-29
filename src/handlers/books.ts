@@ -2,7 +2,11 @@
 import * as config from '../config/knexfile';
 import * as Knex from "knex";
 const instance: Knex = Knex.default(config as Knex.Config);
-
+interface bookAdd {
+    name: string
+    genre: string
+    authorId: number
+}
 export class bookController {
     getBooks = (authorid:string | undefined = undefined) => {
         let query = instance("books").select("*");
@@ -30,7 +34,7 @@ export class bookController {
             })
         );
     }
-    addBook = (bookObj:any) => {
+    addBook = (bookObj:bookAdd) => {
         return Promise.resolve(
             instance("books").insert({
                 name: bookObj.name,
