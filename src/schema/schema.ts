@@ -1,4 +1,3 @@
-import graphql, { GraphQLInt, GraphQLNonNull } from "graphql";
 import { bookController } from '../handlers/books';
 const bookCntrl = new bookController();
 import { authorController } from '../handlers/authors';
@@ -8,39 +7,12 @@ import {
     GraphQLString,
     GraphQLSchema,
     GraphQLID,
-    GraphQLList
+    GraphQLList,
+    GraphQLInt, 
+    GraphQLNonNull
 } from 'graphql';
-
-const BookType:any = new GraphQLObjectType({
-    name: 'Book',
-    fields: () => ({
-        id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        genre: { type: GraphQLString },
-        author: {
-            type: AuthorType,
-            async resolve(parent, args) {
-                let author = await authorCntrl.getAuthorById(parent.authorid)
-                return author;
-            }
-        }
-    })
-})
-
-const AuthorType:any = new GraphQLObjectType({
-    name: 'Author',
-    fields: () => ({
-        id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        age: { type: GraphQLInt },
-        books: {
-            type: new GraphQLList(BookType),
-            async resolve(parent, args) {
-                return await bookCntrl.getBooks(parent.id)
-            }
-        }
-    })
-})
+import { BookType } from "./books/book";
+import { AuthorType } from "./authors/author";
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
