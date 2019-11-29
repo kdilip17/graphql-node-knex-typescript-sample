@@ -12,7 +12,6 @@ const port = 8085; // default port to listen
 
 // define a route handler for the default home page
 app.get( "/", async ( req, res ) => {
-    // let books = await bookCntrl.getBooks()
     res.send("App is healthy...");
 });
 
@@ -21,11 +20,6 @@ app.use('/graphql',
         schema,
         graphiql: true
 }))
-
-// function clear() {
-//     process.stdout.write("\033c")
-// }
-// clear();
 
 // start the Express server
 app.listen( port, () => {
