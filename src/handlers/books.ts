@@ -1,5 +1,5 @@
 
-import * as config from '../knexfile';
+import * as config from '../config/knexfile';
 import * as Knex from "knex";
 const instance: Knex = Knex.default(config as Knex.Config);
 
